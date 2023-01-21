@@ -1,0 +1,12 @@
+{% extends "encyclopedia/layout.html" %}
+{% load markdown_extras %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+
+{{ entry | markdown | safe }}
+
+{% endblock %}
