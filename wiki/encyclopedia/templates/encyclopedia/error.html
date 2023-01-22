@@ -1,12 +1,11 @@
 {% extends "encyclopedia/layout.html" %}
-{% load markdown_extras %}
 
 {% block title %}
-    {{ name }}
+    Page Not Found
 {% endblock %}
 
 {% block body %}
 
-{{ entry | markdown | safe }}
+<h1>Error: the page was not found!</h1>
 
 {% endblock %}
