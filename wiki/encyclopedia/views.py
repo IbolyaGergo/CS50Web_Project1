@@ -75,3 +75,23 @@ def create(request):
         "searchform": SearchForm(),
         "newpageform": NewPageForm()
     })
+
+def edit(request, name):
+
+    if request.method == "POST":
+        data = {"title": name, "content": request.POST['content']}
+        form = NewPageForm(data)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+            util.save_entry(title, content)
+            return redirect('encyclopedia:show_entry', title)
+            
+    data = {"title": name, "content": util.get_entry(name)}
+    form = NewPageForm(data)
+
+    return render(request, "encyclopedia/edit.html", {
+        "searchform": SearchForm(),
+        "form": form,
+        "name": name
+    })
