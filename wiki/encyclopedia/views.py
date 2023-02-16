@@ -7,6 +7,8 @@ from django.contrib import messages
 
 from . import util
 
+import random
+
 class SearchForm(forms.Form):
     q = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Search Encyclopedia'}))
 
@@ -94,4 +96,14 @@ def edit(request, name):
         "searchform": SearchForm(),
         "form": form,
         "name": name
+    })
+
+def random_page(request):
+
+    entry = random.choice(util.list_entries())
+
+    return render(request, "encyclopedia/entry.html", {
+        "entry": util.get_entry(entry),
+        "name": entry,
+        "searchform": SearchForm()
     })
